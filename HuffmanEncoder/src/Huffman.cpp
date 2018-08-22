@@ -29,8 +29,12 @@ void Huffman::print()
     printDictionary(_root, arr, top);
 
     for (int i = 0; i < _cont; i++) {
-        printf("Data: %c\n", _data[i]);
-
+        printf("%c: ", _data[i]);
+        for (int j = 0; j < 8; j++) {
+            if (_dict[i][j] == -1) break;
+            printf("%d", _dict[i][j]);
+        }
+        printf("\n");
     }
 
     //printEncoderContent();
