@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1534897583 source:c:\users\rei panda\desktop\huffman\huffmanencoder\src\getdata.cpp
+	"GetData.h"
+	"stdio.h"
+	"stdlib.h"
+	"string.h"
+	"stdbool.h"
+
+1534876808 c:\users\rei panda\desktop\huffman\huffmanencoder\include\getdata.h
+
+1534951064 source:c:\users\rei panda\desktop\huffman\huffmanencoder\main.cpp
+	"stdio.h"
+	"Huffman.h"
+	"MinHeap.h"
+	"GetData.h"
+	"string.h"
+
+1534964805 c:\users\rei panda\desktop\huffman\huffmanencoder\include\huffman.h
+	"MinHeap.h"
+
+1534964813 source:c:\users\rei panda\desktop\huffman\huffmanencoder\src\huffman.cpp
+	"Huffman.h"
+	"string.h"
+	"stdio.h"
+	"stdlib.h"
+
+1534898701 c:\users\rei panda\desktop\huffman\huffmanencoder\include\minheap.h
+
+1534897485 source:c:\users\rei panda\desktop\huffman\huffmanencoder\src\minheap.cpp
+	"MinHeap.h"
+	"stdlib.h"
+	"stdio.h"
+
