@@ -12,26 +12,29 @@ int main()
     GetData g;
     g.begin(FILENAME);
 
-    printf("%s\n", g.getFileContent());
-    printf("++++++\n");
+    printf("------------------------------\n");
+    printf("String Inicial...: %s\n", g.getFileContent());
+    printf("------------------------------\n");
+
+    printf("Data:\tFreq:\n");
     for (unsigned i = 0; i < g.getSize(); i++) {
         printf("%c\t%d\n", g.getData()[i], g.getFreq()[i]);
     }
-    printf("++++++\n");
+    printf("------------------------------\n");
 
     Huffman h;
 
     h.setValue(g.getData(), g.getFreq(), g.getSize());
-    h.encoder();
-    h.print();
+    h.encoder(g.getFileContent());
 
-    /*
-    char dec[] = {'1','0','1','0','1','1','1','0','0','1','0','1','0','1','1','1','1','0','1','1','0'};
-    char* decode = h.decode(dec);
+    h.printDictinary();
+    printf("------------------------------\n");
+    h.printCEncode();
+    printf("------------------------------\n");
 
-    for (int i = 0; i < strlen(decode); i++)
-        printf("%c", decode[i]);
-    */
+    h.decode();
+    h.printCDedcode();
+    printf("------------------------------\n");
 
     return 0;
 }

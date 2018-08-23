@@ -31,14 +31,14 @@
 	"stdlib.h"
 	"stdio.h"
 
-1534951064 source:c:\users\rei panda\desktop\projeto-final-de-curso\huffmanencoder\main.cpp
+1534990662 source:c:\users\rei panda\desktop\projeto-final-de-curso\huffmanencoder\main.cpp
 	"stdio.h"
 	"Huffman.h"
 	"MinHeap.h"
 	"GetData.h"
 	"string.h"
 
-1534964805 c:\users\rei panda\desktop\projeto-final-de-curso\huffmanencoder\include\huffman.h
+1534990649 c:\users\rei panda\desktop\projeto-final-de-curso\huffmanencoder\include\huffman.h
 	"MinHeap.h"
 
 1534898701 c:\users\rei panda\desktop\projeto-final-de-curso\huffmanencoder\include\minheap.h
@@ -52,7 +52,7 @@
 	"string.h"
 	"stdbool.h"
 
-1534979041 source:c:\users\rei panda\desktop\projeto-final-de-curso\huffmanencoder\src\huffman.cpp
+1534990634 source:c:\users\rei panda\desktop\projeto-final-de-curso\huffmanencoder\src\huffman.cpp
 	"Huffman.h"
 	"string.h"
 	"stdio.h"

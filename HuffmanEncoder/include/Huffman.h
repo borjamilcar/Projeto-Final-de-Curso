@@ -13,7 +13,9 @@
 
 #include "MinHeap.h"
 
-#define MAX_TREE_HT 100
+#define MAX_TREE_HT 25
+#define NUM_BITS_IN_1BYTE 8
+#define COMPRESS_BREAK -1
 
 class Huffman
 {
@@ -35,10 +37,12 @@ class Huffman
          *  Imprime no ecran os valores para comprimir, as suas frequências e
          *  o código, em zero e um, dos valores após serem comprimidos
          */
-        void print();
+        void dictionary();
+
+        void printDictinary();
 
         /***/
-        void printDictionary(struct MinHeapNode* root, unsigned arr[], unsigned top);
+        void buildDictionary(struct MinHeapNode* root, unsigned arr[], unsigned top);
 
         /***/
         void printEncoderContent();
@@ -56,11 +60,21 @@ class Huffman
         void printArr(unsigned arr[], unsigned top);
 
         /***/
-        void encoder();
+        void encoder(char* file_content);
 
         /***/
-        char* decode(char* code);
+        void compress(char* file_content);
 
+        /***/
+        void auxCompress(unsigned short idx);
+
+        void printCEncode();
+
+        /***/
+        void decode();
+
+        /***/
+        void printCDedcode();
     protected:
 
     private:
@@ -69,8 +83,14 @@ class Huffman
         unsigned _arr[MAX_TREE_HT];
         unsigned _top;
         char _data[MAX_TREE_HT];
-        signed _dict[8][8];
-        unsigned _cont;
+        signed _code[9][9];
+        signed _content_encode[MAX_TREE_HT];
+        char _content_decode[MAX_TREE_HT];
+        unsigned short _cont2dictionary;
+        unsigned short _bits2compress;
+        unsigned short _bytes2compress;
+        unsigned short _final_idx;
+
 };
 
 #endif // HUFFMAN_H
