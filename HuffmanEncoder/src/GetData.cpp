@@ -13,6 +13,7 @@ GetData::GetData()
 GetData::~GetData()
 {
     //dtor
+
 }
 
 //

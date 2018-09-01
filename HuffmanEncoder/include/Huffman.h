@@ -13,7 +13,7 @@
 
 #include "MinHeap.h"
 
-#define MAX_TREE_HT 25
+#define MAX_TREE_HT 10000
 #define NUM_BITS_IN_1BYTE 8
 #define COMPRESS_BREAK -1
 
@@ -75,6 +75,18 @@ class Huffman
 
         /***/
         void printCDedcode();
+
+        /***/
+        void binaryToHex();
+
+        /***/
+        void hexToBynary();
+
+        /***/
+        void printHexCDecode();
+
+        /***/
+        void printHexToBinCEncode();
     protected:
 
     private:
@@ -84,12 +96,14 @@ class Huffman
         unsigned _top;
         char _data[MAX_TREE_HT];
         signed _code[9][9];
-        signed _content_encode[MAX_TREE_HT];
+        signed _bin_content_encode[MAX_TREE_HT];
         char _content_decode[MAX_TREE_HT];
         unsigned short _cont2dictionary;
         unsigned short _bits2compress;
         unsigned short _bytes2compress;
         unsigned short _final_idx;
+        unsigned _hex_content_encode;
+        signed _hex_to_bin_content[MAX_TREE_HT];
 
 };
 

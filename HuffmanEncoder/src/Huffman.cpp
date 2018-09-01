@@ -15,7 +15,7 @@ Huffman::Huffman()
 Huffman::~Huffman()
 {
     //dtor
-    delete _root;
+    //delete _root;
 }
 
 //
@@ -134,6 +134,7 @@ void Huffman::encoder(char* file_content)
     _root = _minHeap.extractMin();
     dictionary();
     compress(file_content);
+    binaryToHex();
 }
 
 //
@@ -142,12 +143,12 @@ void Huffman::auxCompress(unsigned short idx)
     for (unsigned short i = 0; i < 9; i++) {
         if (_code[idx][i] == -1) break;
 
-        _content_encode[_bits2compress++] = _code[idx][i];
+        _bin_content_encode[_bits2compress++] = _code[idx][i];
 
         /* Cálculo do número de bytes usados na compressão */
         // sempre que o número de bits que já foram usados na compressão (_bits2compress)
         // forem maior que 1 BYTE - 1 (INICIAL); 9 (2 BYTES); 17 (3 BYTES), ETC...
-        if (_bits2compress > ((_bytes2compress * NUM_BITS_IN_1BYTE) + 1)) {
+        if (_bits2compress == ((_bytes2compress * NUM_BITS_IN_1BYTE) + 1)) {
             _bytes2compress += 1;
         }
     }
@@ -164,8 +165,10 @@ void Huffman::compress(char* file_content)
         c = file_content[i];
 
         for (unsigned short j = 0; j < _cont2dictionary; j++) {
-            if (c == _data[j])  // Quando o caracter é encontrado no dicionário de caracteres
-                auxCompress(j); // Set dos bits deste caracter
+            if (c == _data[j]) {    // Quando o caracter é encontrado no dicionário de caracteres
+                auxCompress(j);     // Set dos bits deste caracter
+                break;
+            }
         }
     }
 
@@ -180,29 +183,29 @@ void Huffman::compress(char* file_content)
 
     /* Completar a compressão com os bits em falta */
     for (unsigned short i = 0; i < _final_idx; i++)
-        _content_encode[_bits2compress++] = 0;
+        _bin_content_encode[_bits2compress++] = 0;
 
     // break da compressão
-    _content_encode[_bits2compress] = COMPRESS_BREAK;
+    _bin_content_encode[_bits2compress] = COMPRESS_BREAK;
 }
 
 //
 void Huffman::printCEncode()
 {
-    printf("String Encode....: ");
+    printf("String Encode.......: ");
     for (unsigned short i = 0; i < MAX_TREE_HT; i++) {
-        if (_content_encode[i] == COMPRESS_BREAK) break;
-        printf("%d", _content_encode[i]);
+        if (_bin_content_encode[i] == COMPRESS_BREAK) break;
+        printf("%d", _bin_content_encode[i]);
     }
 
-    printf("\nBytes Ocupados...: %d\n", _bytes2compress);
-    printf("Bits Adicionados.: %d x 0 a direita\n", _final_idx);
+    printf("\nBytes Ocupados......: %d\n", _bytes2compress);
+    printf("Bits Adicionados....: %d x 0 a direita\n", _final_idx);
 }
 
 //
 void Huffman::printCDedcode()
 {
-    printf("String Decode....: %s\n", _content_decode);
+    printf("String Decode.......: %s\n", _content_decode);
 }
 
 //
@@ -212,7 +215,7 @@ void Huffman::decode()
     unsigned cont = 0;
 
     for (unsigned i = 0; i < (_bytes2compress * NUM_BITS_IN_1BYTE) - _final_idx; i++) {
-        if (_content_encode[i] == 0)
+        if (_bin_content_encode[i] == 0)
             curr = curr->left;
         else
             curr = curr->right;
@@ -224,4 +227,55 @@ void Huffman::decode()
     }
 
     _content_decode[cont] = '\0';
+}
+
+//
+void Huffman::binaryToHex()
+{
+    unsigned short i = 0;
+    _hex_content_encode = 0;
+
+    while (_bin_content_encode[i] != COMPRESS_BREAK)
+        _hex_content_encode = (_hex_content_encode<<1)|_bin_content_encode[i++];
+
+}
+
+//
+void Huffman::printHexCDecode()
+{
+    printf("String Encode in Hex: 0x%X\n", _hex_content_encode);
+    printf("String Encode in Dec: %d\n", _hex_content_encode);
+}
+
+//
+void Huffman::hexToBynary()
+{
+    int c, k, i=0;
+
+    for (c = 31; c >= 0; c--) {
+        k = _hex_content_encode >> c;
+
+        if (k & 1) {
+            //printf("1");
+            _hex_to_bin_content[i++] = 1;
+        } else {
+            if (i > 0) {
+                //printf("0");
+                _hex_to_bin_content[i++] = 0;
+            }
+        }
+    }
+
+    _hex_to_bin_content[i] = COMPRESS_BREAK;
+}
+
+//
+void Huffman::printHexToBinCEncode()
+{
+    printf("Binary to Hex.......: ");
+    for (unsigned short i = 0; i < MAX_TREE_HT; i++) {
+        if (_hex_to_bin_content[i] == COMPRESS_BREAK) break;
+        printf("%d", _hex_to_bin_content[i]);
+    }
+    printf("\n");
 }

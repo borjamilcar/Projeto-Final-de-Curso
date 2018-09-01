@@ -10,7 +10,7 @@ MinHeap::MinHeap()
 MinHeap::~MinHeap()
 {
     //dtor
-    delete _arr;
+    //delete _arr;
 }
 
 //
